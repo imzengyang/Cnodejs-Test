@@ -1,0 +1,29 @@
+{
+  "name": "cnodejs-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "uitest": "mocha uiTest/**/*.js ",
+    "apitest": "mocha apiTest/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imzengyang/Cnodejs-Test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imzengyang/Cnodejs-Test/issues"
+  },
+  "homepage": "https://github.com/imzengyang/Cnodejs-Test#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "chromedriver": "^2.32.3",
+    "mocha": "^3.5.3",
+    "mocha-junit-reporter": "^1.13.0",
+    "mongodb": "^2.2.31",
+    "selenium-webdriver": "^3.5.0"
+  }
+}
