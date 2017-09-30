@@ -11,13 +11,12 @@
  * 9 注册窗口与注册窗口是否可以正常切换
  */
 
-
-
 require('chromedriver')
 let { Builder } = require('selenium-webdriver')
 
 let registerPage = require('../../config/uiconfig/registerPage')
 let loginPage = require('../../config/uiconfig/loginPage')
+let indexPage = require('../../config/uiconfig/indexPage')
 
 let app = require('../../config/app.confifg')
 let uiAction = require('../../common/ui/uiaction')
@@ -96,12 +95,15 @@ describe('注册功能', function () {
         let errortip =  await driver.findElement(loginPage).getText();
         return assert.ok(errortip.indexOf(actualtip) > 0)
     })
-    it.only('激活后能够正常登录', async function () {
+    it('激活后能够正常登录', async function () {
         let nowdate = new Date().valueOf();
         await uiAction.userRegister(driver,nowdate,"123456","123456",nowdate+"@163.com")
         // todo new Promise() async
-        await dbAction.activeUser(nowdate);
+        dbAction.activeUser(nowdate);
         await uiAction.userLogin(driver,nowdate,"123456");
+        //验证登录成功后首页显示用户名
+        let assertUserName = await driver.findElement(indexPage.username).getText();
+        return assert.equal(assertUserName,nowdate)
     })
     it('注册窗口与注册窗口是否可以正常切换', async function () {
 

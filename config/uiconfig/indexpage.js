@@ -4,5 +4,8 @@ module.exports = {
     },
     registerhref:{
         css: 'a[href="/signup"]'
+    },
+    username:{
+        css:'.user_card .user_name'
     }
 }

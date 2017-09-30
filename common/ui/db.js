@@ -2,38 +2,21 @@
 
 var MongoClient = require('mongodb').MongoClient
 let assert = require('assert');
-let url = 'mongodb://localhost:27017/node_club_dev1';
+let app = require('../../config/app.confifg');
 
 
-let activeUser = async function(user){
-    new Promise((resovle,reject) => {
-        MongoClient.connect(url, function (err, db) {
-            if(err){
-                reject(err);
-            }
-            assert.equal(null, err);
-            console.log("Connected correctly to server");
-            let collection = db.collection("users")
-            // active user;
-            
-            console.log("will active the user",user)
-            collection.updateOne({ name: `${user}` }, { $set: { "active": true } }, function (err, docs) {
-                if(err){
-                    reject(err)
-                }
-            })
-            db.close(resovle); 
-        });
-        
-    })
+let activeUser = function (user, done) {
+    MongoClient.connect(app.mongodbUrl, function (err, db) {
+        assert.equal(null, err);
+        console.log("Connected correctly to server");
+        let collection = db.collection("users")
+        // active user;
+
+        console.log("will active the user", user)
+        collection.updateOne({ name: `${user}` }, { $set: { "active": true } }, function (err, docs) {
+           console.log(err,docs.result)
+        })
+        db.close(done);
+    });
 }
-
-
-
-let test = async function () {
-    let user = "15066908694761221";
-    await activeUser(user);
-}
-test();
-
-// module.exports.activeUser = activeUser;
+module.exports.activeUser = activeUser;
