@@ -55,7 +55,7 @@ describe('注册功能', function () {
         // 验证页面中的元素是否存在
         return assert.ok(driver.findElement({ css: "#content > div > div.header > ul > li.active" }));
     })
-    describe.only('注册信息合法值验证', function () {
+    describe('注册信息合法值验证', function () {
         it('两次密码不一致 应该收到<两次密码输入不一致。>提示', async function () {
             await uiAction.userRegister(driver,"imzack","123456","654321","imzack@163.com")
             let errortip = await driver.findElement(registerPage.errortip).getText();
