@@ -34,3 +34,4 @@ let saveScreenShots = async function (driver){
 
 module.exports.userLogin = userLogin;
 module.exports.userRegister = userRegister;
+module.exports.saveScreenShots = saveScreenShots;

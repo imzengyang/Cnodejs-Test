@@ -34,12 +34,14 @@ describe('注册功能', function () {
     })
 
     afterEach('tackscreenshot', async function () {
-        //todo
+        
+        await uiAction.saveScreenShots(driver);
+        await driver.manage().deleteAllCookies();
     })
 
     after(' close browser', async function () {
-        await driver.manage().deleteAllCookies();
-        // return await driver.quit();
+        
+        return await driver.quit();
     })
 
 
@@ -55,20 +57,23 @@ describe('注册功能', function () {
         // 验证页面中的元素是否存在
         return assert.ok(driver.findElement({ css: "#content > div > div.header > ul > li.active" }));
     })
-    describe('注册信息合法值验证', function () {
+    describe.only('注册信息合法值验证', function () {
         it('两次密码不一致 应该收到<两次密码输入不一致。>提示', async function () {
+            await driver.get(app.baseUrl);
             await uiAction.userRegister(driver,"imzack","123456","654321","imzack@163.com")
             let errortip = await driver.findElement(registerPage.errortip).getText();
             //验证提示信息是否正确
-            return assert.deepEqual("两次密码输入不一致。",errortip);
+            return assert.ok(errortip.indexOf("两次密码输入不一致。") > 0);
         })
         it('email 格式不正确,提示 邮箱不合法。',async function(){
+            await driver.get(app.baseUrl);
             await uiAction.userRegister(driver,"imzack","123456","123456","imzack163com")
             let errortip = await driver.findElement(registerPage.errortip).getText();
             //邮箱不合法。
             return assert.ok(errortip.indexOf("邮箱不合法。") > -1);
         })
         it('用户名存在，提示用户名或邮箱已被使用。',async function(){
+            await driver.get(app.baseUrl);
             await uiAction.userRegister(driver,"imzack","123456","123456","imzack@163.com")
             let errortip = await driver.findElement(registerPage.errortip).getText();
             //用户名或邮箱已被使用。
@@ -76,6 +81,7 @@ describe('注册功能', function () {
         })
     })
     it('注册成功后是否显示激活提示信息', async function () {
+        await driver.get(app.baseUrl);
         let nowdate = new Date().valueOf();
         await uiAction.userRegister(driver,nowdate,"123456","123456",nowdate+"@163.com")
         let successtip = await driver.findElement(registerPage.successtip).getText();
@@ -87,6 +93,7 @@ describe('注册功能', function () {
         //暂不支持 todo
     })
     it('使用未激活的账户登录', async function () {
+        await driver.get(app.baseUrl);
         let nowdate = new Date().valueOf();
         await uiAction.userRegister(driver,nowdate,"123456","123456",nowdate+"@163.com")
         await uiAction.userLogin(driver,nowdate,"123456");
@@ -96,6 +103,7 @@ describe('注册功能', function () {
         return assert.ok(errortip.indexOf(actualtip) > 0)
     })
     it('激活后能够正常登录', async function () {
+        await driver.get(app.baseUrl);
         let nowdate = new Date().valueOf();
         await uiAction.userRegister(driver,nowdate,"123456","123456",nowdate+"@163.com")
         // todo new Promise() async
@@ -109,12 +117,4 @@ describe('注册功能', function () {
 
     })
 
-})
-
-describe.skip ('testcase',function(){
-    it.only("one",function () {
-        let nowdate = new Date().valueOf();
-        let a = `helloworld '${nowdate}'`
-        console.log(a)
-    })
 })
