@@ -7,7 +7,6 @@ let userinfo = require('../../config/userinfo.json')
 let app = require('../../config/app.confifg');
 let util = require('./util')
 
-
 let userLogin = async function(driver,userName,passWord){
     await driver.get(app.baseUrl);
     await driver.findElement(ui.loginhref).click();

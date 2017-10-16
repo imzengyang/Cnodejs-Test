@@ -1,0 +1,14 @@
+{
+    "emailerrData": {
+        "userName": "imzack",
+        "password": "123456",
+        "repassword": "123456",
+        "email": "imzack163com"
+    },
+    "passworderrData":{
+        "userName": "imtom",
+        "password": "1234567890",
+        "repassword": "654321ddddd",
+        "email": "imzack@163.com"
+    }
+}

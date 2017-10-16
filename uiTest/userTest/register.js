@@ -21,6 +21,8 @@ let indexPage = require('../../config/uiconfig/indexPage')
 let app = require('../../config/app.confifg')
 let uiAction = require('../../common/ui/uiaction')
 let dbAction = require('../../common/ui/db')
+
+let data = require("../../testdata/register.json")
 let driver;
 
 //
@@ -58,9 +60,10 @@ describe('注册功能', function () {
         return assert.ok(driver.findElement({ css: "#content > div > div.header > ul > li.active" }));
     })
     describe.only('注册信息合法值验证', function () {
-        it('两次密码不一致 应该收到<两次密码输入不一致。>提示', async function () {
+        it.only('两次密码不一致 应该收到<两次密码输入不一致。>提示', async function () {
             await driver.get(app.baseUrl);
-            await uiAction.userRegister(driver,"imzack","123456","654321","imzack@163.com")
+            console.log(data.passworderrData.userName,data.passworderrData.password,data.passworderrData.repassword,data.passworderrData.email);
+            await uiAction.userRegister(driver,data.passworderrData.userName,data.passworderrData.password,data.passworderrData.repassword,data.passworderrData.email)
             let errortip = await driver.findElement(registerPage.errortip).getText();
             //验证提示信息是否正确
             return assert.ok(errortip.indexOf("两次密码输入不一致。") > 0);
