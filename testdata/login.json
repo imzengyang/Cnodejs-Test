@@ -1,0 +1,45 @@
+{
+    "userinfo_success": [
+        {
+            "username": "imzack",
+            "password": "123456"
+        }
+    ],
+    "userinfo_err": [
+        {
+            "username": "imzack",
+            "password": "1234561",
+            "errortip":"用户名或密码错误"
+        },
+        {
+            "username": "imzack1",
+            "password": "123456",
+            "errortip":"用户名或密码错误"
+        },
+        {
+            "username": "",
+            "password": "123456",
+            "errortip":"信息不完整。"
+        },
+        {
+            "username": "imz",
+            "password": "",
+            "errortip":"信息不完整。"
+        },
+        {
+            "username": "imzacwk",
+            "password": "",
+            "errortip":"信息不完整。"
+        },
+        {
+            "username": "imzack",
+            "password": "",
+            "errortip":"信息不完整。"
+        },
+        {
+            "username": "",
+            "password": "",
+            "errortip":"信息不完整。"
+        }
+    ]
+}

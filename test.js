@@ -28,7 +28,3 @@ let testGetText = async function(driver,username,password) {
 }
 
 testGetText(driver,"imzack","123456");
-
-
-
-
