@@ -24,7 +24,9 @@ let uiAction = require('../../common/ui/uiaction')
 
 require("chromedriver")
 var assert = require('assert');
+
 var { Builder } = require('selenium-webdriver');
+let {until} = require('selenium-webdriver');
 let testdata = require('../../testdata/login.json');
 
 let userinfo_success = testdata.userinfo_success;
@@ -62,7 +64,6 @@ describe('用户登录', function () {
             await uiAction.userLogin(driver,userinfo_err[i].username,userinfo_err[i].password)
             //错误信息提示断言
             let errTip = await driver.findElement(loginPage.errortip).getText();
-            
             assert.ok(errTip.indexOf(userinfo_err[i].errortip) > -1)
         }
     })
